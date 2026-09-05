@@ -1,0 +1,9 @@
+{
+  "name": "high-yield-simulation",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check app.js && node --check server.mjs && node tests/simulation.test.mjs"
+  }
+}

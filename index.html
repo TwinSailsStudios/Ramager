@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0d0c" />
+    <meta name="description" content="High-Yield — a playable real-estate management simulation." />
+    <title>High-Yield · Real Estate Simulation</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="High-Yield dashboard">
+        <span class="brand-mark">HY</span><span>HIGH—YIELD</span>
+      </a>
+      <div class="market-strip" aria-label="Market indicators">
+        <span>METRO INDEX <b id="market-index">104.2</b></span>
+        <span>BASE RATE <b id="base-rate">5.25%</b></span>
+        <span>WEATHER <b id="weather-label">CLEAR · 18°C</b></span>
+      </div>
+      <div class="clock-controls">
+        <button class="icon-button" id="pause-button" aria-label="Pause simulation">Ⅱ</button>
+        <button class="speed active" data-speed="1">1×</button>
+        <button class="speed" data-speed="4">4×</button>
+        <button class="speed" data-speed="12">12×</button>
+        <span class="date" id="sim-date">APR 01 · YEAR 1</span>
+      </div>
+    </header>
+
+    <aside class="sidebar">
+      <nav aria-label="Primary navigation">
+        <button class="nav-item active" data-view="portfolio"><span>⌂</span>Portfolio</button>
+        <button class="nav-item" data-view="properties"><span>▥</span>Properties</button>
+        <button class="nav-item" data-view="tenants"><span>♙</span>Tenants</button>
+        <button class="nav-item" data-view="maintenance"><span>◇</span>Maintenance <i id="maintenance-count">2</i></button>
+        <button class="nav-item" data-view="market"><span>◎</span>Market</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="nav-item" id="save-button"><span>↓</span>Save game</button>
+        <button class="nav-item" id="reset-button"><span>↻</span>New game</button>
+      </div>
+    </aside>
+
+    <main>
+      <section class="hero-row">
+        <div>
+          <p class="eyebrow" id="view-eyebrow">OWNER COMMAND CENTER</p>
+          <h1 id="view-title">Portfolio overview</h1>
+          <p class="subtitle" id="view-subtitle">Monitor performance, protect your assets, and grow deliberately.</p>
+        </div>
+        <button class="primary-button" id="action-button">+ Acquire property</button>
+      </section>
+
+      <section id="portfolio-view" class="view active">
+        <div class="metrics" id="metric-cards"></div>
+        <div class="dashboard-grid">
+          <article class="panel cashflow-panel">
+            <div class="panel-heading"><div><p class="eyebrow">PERFORMANCE</p><h2>Cash flow</h2></div><div class="legend"><i></i>Net monthly</div></div>
+            <div class="chart-summary"><strong id="chart-total">$8,420</strong><span id="chart-change">↑ 12.4% vs last month</span></div>
+            <svg id="cash-chart" viewBox="0 0 720 230" role="img" aria-label="Six month cash flow chart"></svg>
+          </article>
+          <article class="panel health-panel">
+            <div class="panel-heading"><div><p class="eyebrow">PORTFOLIO HEALTH</p><h2>At a glance</h2></div><span class="status-pill">STABLE</span></div>
+            <div class="health-ring" id="health-ring"><div><b id="health-score">86</b><small>/ 100</small></div></div>
+            <div id="health-breakdown"></div>
+          </article>
+          <article class="panel properties-panel">
+            <div class="panel-heading"><div><p class="eyebrow">ASSETS</p><h2>Your properties</h2></div><button class="text-button" data-go="properties">View all →</button></div>
+            <div id="property-list"></div>
+          </article>
+          <article class="panel feed-panel">
+            <div class="panel-heading"><div><p class="eyebrow">LIVE OPERATIONS</p><h2>Activity feed</h2></div><span class="live-dot">LIVE</span></div>
+            <div class="activity-list" id="activity-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="properties-view" class="view"><div class="asset-grid" id="asset-grid"></div></section>
+      <section id="tenants-view" class="view"><div class="panel table-panel"><div class="panel-heading"><div><p class="eyebrow">HOUSEHOLDS</p><h2>Tenant directory</h2></div><span class="status-pill">8 ACTIVE</span></div><div class="data-table" id="tenant-table"></div></div></section>
+      <section id="maintenance-view" class="view"><div class="work-grid" id="work-grid"></div></section>
+      <section id="market-view" class="view"><div class="market-grid" id="market-grid"></div></section>
+    </main>
+
+    <div class="modal-backdrop" id="modal" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+        <p class="eyebrow" id="modal-eyebrow">OPPORTUNITY</p><h2 id="modal-title">Acquire property</h2>
+        <div id="modal-content"></div>
+      </section>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
